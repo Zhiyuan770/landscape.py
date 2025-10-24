@@ -1,0 +1,100 @@
+import pygame
+
+pygame.init()
+
+WIDTH = 640
+HEIGHT = 480
+SIZE = (WIDTH, HEIGHT)
+
+screen = pygame.display.set_mode(SIZE)
+clock = pygame.time.Clock()
+
+# ---------------------------
+# Initialize global variables
+
+rect_x = 250
+rect_y = 300
+cloud_x = 200
+sun_x = 200
+radius = 30
+cloud_x_speed = 2
+sun_x_speed = 1
+brightness = 0
+
+# ---------------------------
+
+running = True
+while running:
+    # EVENT HANDLING
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            running = False
+        
+# GAME STATE UPDATES
+# All game math and comparisons happen here
+
+    cloud_x += cloud_x_speed
+    if cloud_x > WIDTH:
+        cloud_x = -cloud_x_speed
+    sun_x += sun_x_speed
+    if sun_x > WIDTH:
+        sun_x = -sun_x_speed
+  
+
+# Drawing Background
+    screen.fill("#87CEEB")  
+
+# Increase Brightness
+    if brightness < 255:
+        brightness += 5
+
+# Drawing Grass
+    pygame.draw.rect(screen, "#06ED12", (0, HEIGHT - 100, WIDTH, 180)) 
+
+# Drawing House
+    pygame.draw.rect(screen, (0, 0, 225), (rect_x, rect_y, 100, 100))
+    pygame.draw.polygon(screen, (50, 50, 50), [(rect_x, rect_y), (rect_x + 100, rect_y), (rect_x + 50, rect_y - 50)])
+    pygame.draw.rect(screen, (150, 75, 0), (rect_x + 50, rect_y + 50, 30, 50))
+    pygame.draw.rect(screen, (225, 225, 225), (rect_x + 15, rect_y + 25, 20, 20))
+    pygame.draw.rect(screen, (50, 50, 50), (rect_x + 75, rect_y - 50, 20, 50))
+
+# Drawing Clouds
+    pygame.draw.circle(screen, "#e2e2e2", (cloud_x + 40, 187), radius)
+    pygame.draw.circle(screen, "#e2e2e2", (cloud_x + 72, 155), radius)
+    pygame.draw.circle(screen, "#e2e2e2", (cloud_x + 105, 178), radius)
+    pygame.draw.circle(screen, "#e2e2e2", (cloud_x + 77, 182), radius)
+
+    pygame.draw.circle(screen, "#e2e2e2", (cloud_x + 270, 187), radius)
+    pygame.draw.circle(screen, "#e2e2e2", (cloud_x + 302, 155), radius)
+    pygame.draw.circle(screen, "#e2e2e2", (cloud_x + 335, 178), radius)
+    pygame.draw.circle(screen, "#e2e2e2", (cloud_x + 307, 182), radius)
+
+    pygame.draw.circle(screen, "#e2e2e2", (cloud_x - 110, 187), radius)
+    pygame.draw.circle(screen, "#e2e2e2", (cloud_x - 142, 155), radius)
+    pygame.draw.circle(screen, "#e2e2e2", (cloud_x - 175, 178), radius)
+    pygame.draw.circle(screen, "#e2e2e2", (cloud_x - 147, 182), radius)
+
+#Drawing Extra Clouds(finish tmr in class, these clouds are not seen until animation)
+    pygame.draw.circle(screen, "#e2e2e2", (cloud_x - 340, 187), radius)
+    pygame.draw.circle(screen, "#e2e2e2", (cloud_x - 372, 155), radius)
+    pygame.draw.circle(screen, "#e2e2e2", (cloud_x - 405, 178), radius)
+    pygame.draw.circle(screen, "#e2e2e2", (cloud_x - 377, 182), radius)
+
+    pygame.draw.circle(screen, "#e2e2e2", (cloud_x - 540, 187), radius)
+    pygame.draw.circle(screen, "#e2e2e2", (cloud_x - 572, 155), radius)
+    pygame.draw.circle(screen, "#e2e2e2", (cloud_x - 605, 178), radius)
+    pygame.draw.circle(screen, "#e2e2e2", (cloud_x - 577, 182), radius)
+
+    pygame.draw.circle(screen, "#e2e2e2", (cloud_x - 740, 187), radius)
+    pygame.draw.circle(screen, "#e2e2e2", (cloud_x - 772, 155), radius)
+    pygame.draw.circle(screen, "#e2e2e2", (cloud_x - 805, 178), radius)
+    pygame.draw.circle(screen, "#e2e2e2", (cloud_x - 777, 182), radius)
+
+# Drawing Timmy the Sun
+    pygame.draw.circle(screen, "#f6de05", (sun_x, 50), radius + 10)
+
+    pygame.display.flip()
+    clock.tick(30)
+#---------------------------
+
+pygame.quit()
